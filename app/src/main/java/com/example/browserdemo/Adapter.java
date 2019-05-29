@@ -32,8 +32,9 @@ public class Adapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Object getItem(int position)
+    {
+        return names.get(position);
     }
 
     @Override
