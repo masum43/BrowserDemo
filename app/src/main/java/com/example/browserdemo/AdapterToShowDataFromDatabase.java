@@ -81,17 +81,6 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
             tv = (TextView) grid.findViewById(R.id.savedUrlNameId);
             iv = (ImageView) grid.findViewById(R.id.imageViewIdSingleLayout);
 
-            //String value3 = (names.get(3).getItemName()).trim();
-            //String value4 = (names.get(4).getItemName()).trim();
-
-
-
-            /*for (int i=position;i<names.size();i++){
-
-
-                NamevaluesStr.add(names.get(i).getItemName());
-            } */
-
 
             String check = "Add Item";
             int newPosition;
@@ -226,29 +215,7 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
 
             }
 
-           // String value2 = tv.getText().toString();
 
-            /*try {
-                if(position==4&&value3.equals(check)){
-
-                    if(position==4){
-                            tv.setText(check);
-                    iv.setImageResource(imagesInt.get(position-1));
-                            }
-
-                    tv.setText(names.get(position+1).getItemName());
-
-                }
-            }
-            catch (Exception e){
-
-                Toast.makeText(mcontext, "Error : "+e, Toast.LENGTH_LONG).show();
-            }
-
-            /*if(value.equals(check)){
-                newPosition = position;
-                if()
-            } */
 
         } else {
             grid = (View) convertView;

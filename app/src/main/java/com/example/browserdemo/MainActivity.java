@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
     MyDatabaseHelper myDatabaseHelper;
     AdapterToShowDataFromDatabase adapterToShowDataFromDatabase;
 
-    //int AddBtnNumber = 0;
-    //String[] MnewName = new String[100];
+
 
 
 
@@ -44,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.instagram, R.drawable.quora,
             R.drawable.overflowing,R.drawable.plus};
 
-    //int [] ids = {1,2,3,100};
 
-    GridAdapter adapter;
 
     ArrayList<Integer> NewImages;
     ArrayList<String> NewNames;
@@ -65,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         NewImages = new ArrayList<Integer>();
         NewNames = new ArrayList<String>();
-        //adapterToShowDataFromDatabase = new AdapterToShowDataFromDatabase(this);
+
 
         myDatabaseSource = new MyDatabaseSource(this);
 
