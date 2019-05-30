@@ -4,6 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<NameAndUrlModel>NewNamesFromDatabase;
     ArrayList<NameAndUrlModel>ImagesFromDatabase;
     ArrayList<NameAndUrlModel>UrlFromDatabase;
-    ArrayList<NameAndUrlModel>ids;
+    ArrayList<NameAndUrlModel>deleteArrayList;
 
     MyDatabaseSource myDatabaseSource;
     MyDatabaseHelper myDatabaseHelper;
@@ -77,8 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
               NewNamesFromDatabase = myDatabaseSource.getAllItemWithNameUrlAndImage();
               ImagesFromDatabase = myDatabaseSource.getAllItemWithNameUrlAndImage();
-               adapterToShowDataFromDatabase = new AdapterToShowDataFromDatabase(MainActivity.this,ImagesFromDatabase,NewNamesFromDatabase,NewImages);
+              UrlFromDatabase = myDatabaseSource.getAllItemWithNameUrlAndImage();
+               adapterToShowDataFromDatabase = new AdapterToShowDataFromDatabase(MainActivity.this,NewNamesFromDatabase,UrlFromDatabase);
                gridView.setAdapter(adapterToShowDataFromDatabase);
+
+               //To delete single item now need to register gridview with context menu
+
+               registerForContextMenu(gridView);
 
 
                goBtn.setOnClickListener(new View.OnClickListener() {
@@ -123,127 +131,54 @@ public class MainActivity extends AppCompatActivity {
                    }
                });
 
+    }
 
+    //to delete single item now need to override onCreateContextMenu method and onContextItemSelected method
 
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
 
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu,menu);
+        //menu.setHeaderTitle("Delete");
+    }
 
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
 
 
+        //To get the selected position... listview ba gridview k context er sathe reg na korle listview.getselectedItemPosion(); method er maddhome o position get kora jeto
+        AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
+        if(item.getItemId() == R.id.deleteItemId){
+            deleteArrayList = myDatabaseSource.getAllItemWithNameUrlAndImage();
+            //Toast.makeText(this, "Error :  "+deleteArrayList, Toast.LENGTH_LONG).show();
+            if (deleteArrayList.get(adapterContextMenuInfo.position).getItemName().equals("Add Item")){
+                Toast.makeText(this, "No no you can not delete this... Please don't mind.. :)", Toast.LENGTH_LONG).show();
+            }
+            else {
 
+                Boolean status = myDatabaseSource.deleteItem(deleteArrayList.get(adapterContextMenuInfo.position));
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        final List<Integer> images = new ArrayList<>();
-        final List<String> names = new ArrayList<>();
-
-        images.add(R.drawable.plus);
-        images.add(R.drawable.facebook);
-        images.add(R.drawable.twitter);
-        images.add(R.drawable.searchitem);
-
-        names.add("Add");
-        names.add("Facebook");
-        names.add("Twitter");
-        names.add("Google");
-
-        //String addItemName = null,addUrl=null;
-        String[] nameArray = new String[100];
-        final Intent intentAddItem = getIntent();
-
-
-
-            nameArray[0] = intentAddItem.getStringExtra("name");
-            String addUrl = intentAddItem.getStringExtra("url");
-            //nameArray[1]= intentAddItem.getStringExtra("name");
-            //nameArray[2]= intentAddItem.getStringExtra("name");
-
-
-            images.add(R.drawable.additem);
-            names.add(MnewName[0]);
-
-
-            nameArray[1]= intentAddItem.getStringExtra("name");
-        images.add(R.drawable.additem);
-        names.add(nameArray[1]);
-
-
-
-
-
-
-            //images.add(R.drawable.additem);
-            //names.add(nameArray[1]);
-
-
-            //images.add(R.drawable.additem);
-            //names.add(nameArray[2]);
-
-
-
-
-
-
-
-
-
-
-
-        Adapter adapter = new Adapter(this,images,names);
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(MainActivity.this, "Clicked : "+parent, Toast.LENGTH_SHORT).show();
-
-                int Id = parent.getSelectedItemPosition();
-
-                int result = AddBtnNumber;
-                if(position==0){
-                    Intent intent = new Intent(MainActivity.this,AddItem.class);
-                    //int AddBtnNumber = 1;
-                    startActivity(intent);
-
-                    result = result+1;
-
+                if(status){
+                    Toast.makeText(this, "Deleted Successfully. Please Exit and come back to see the change....", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MainActivity.this,MainActivity.class);
                 }
-                for(result = 0;result<=100;result++){
-                    if(result==1){
-                        Intent intentAddItem = getIntent();
-                        String[] newNameStr = new String[100];
-                        newNameStr[0] = intentAddItem.getStringExtra("name");
-                        MnewName[0]=newNameStr[0];
-                    }
-
+                else {
+                    Toast.makeText(this, "Failed to delete.......", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
-        }); */
+
+        }
+        return super.onContextItemSelected(item);
+
     }
+
+
 }

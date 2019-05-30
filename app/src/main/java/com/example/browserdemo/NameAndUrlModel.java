@@ -10,10 +10,10 @@ public class NameAndUrlModel {
     int[] ids;
     int image;
 
-    public NameAndUrlModel(String itemName, String url, int image) {
+    public NameAndUrlModel(String itemName, String url, int id) {
         this.itemName = itemName;
         this.url = url;
-        this.image = image;
+        this.id = id;
     }
 /* public NameAndUrlModel(String itemName, String url, int id) {
         this.itemName = itemName;
@@ -47,15 +47,17 @@ public class NameAndUrlModel {
         this.ids = ids;
     }
 
-    public int getId() {
-        return id;
-    }
     public int[] getIds() {
         return ids;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public int getId() {
+        return id;
     }
 
     public String getItemName() {

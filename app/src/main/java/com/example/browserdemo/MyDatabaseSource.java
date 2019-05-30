@@ -15,6 +15,8 @@ public class MyDatabaseSource {
     SQLiteDatabase sqLiteDatabase;
     NameAndUrlModel nameAndUrlModel;
 
+
+
     public MyDatabaseSource(Context context)
     {
         myDatabaseHelper = new MyDatabaseHelper(context);
@@ -93,14 +95,10 @@ public class MyDatabaseSource {
             do{
                 String name = cursor.getString(cursor.getColumnIndex(myDatabaseHelper.COL_NAME));
                 String url = cursor.getString(cursor.getColumnIndex(myDatabaseHelper.COL_URL));
+                int id = cursor.getInt(cursor.getColumnIndex(myDatabaseHelper.COL_ID));
                 int image = cursor.getInt(cursor.getColumnIndex(myDatabaseHelper.COL_IMAGE));
-                //int id = cursor.getInt(cursor.getColumnIndex(myDatabaseHelper.COL_ID));
 
-                /*if(name.equals(3) && url.equals(3)){
-                    id = id+50;
-                } */
-
-                NameAndUrlModel nameAndUrlModel = new NameAndUrlModel(name,url,image); // student model e datagula set korechi constructor call kore
+                NameAndUrlModel nameAndUrlModel = new NameAndUrlModel(name,url,id,image); // student model e datagula set korechi constructor call kore
                 arrayList.add(nameAndUrlModel);
             }
             while (cursor.moveToNext());
@@ -109,6 +107,25 @@ public class MyDatabaseSource {
         cursor.close();
 
         return arrayList;
+
+    }
+    //delete method
+    public boolean deleteItem(NameAndUrlModel model){
+
+
+        this.open();
+
+        int deletedRow = sqLiteDatabase.delete(MyDatabaseHelper.TABLE_NAME,MyDatabaseHelper.COL_ID+" =?",new String[]{String.valueOf(model.getId())});
+
+        this.close();
+
+        if(deletedRow>0)
+        {
+
+            return true;
+        }
+        else return false;
+
 
     }
 

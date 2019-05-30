@@ -20,7 +20,7 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
     ArrayList<NameAndUrlModel> images;
     ArrayList<Integer> imagesInt;
     ArrayList<NameAndUrlModel> names;
-    ArrayList<String> NamevaluesStr;
+    ArrayList<NameAndUrlModel> UrlArrayList;
     ArrayList<Integer> ImagevaluesInt;
     TextView tv;
     ImageView iv;
@@ -31,11 +31,12 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
         this.names = names;
     } */
 
-    public AdapterToShowDataFromDatabase(Context mcontext, ArrayList<NameAndUrlModel> images, ArrayList<NameAndUrlModel> names,    ArrayList<Integer> imagesInt) {
+    public AdapterToShowDataFromDatabase(Context mcontext, ArrayList<NameAndUrlModel> names, ArrayList<NameAndUrlModel> UrlArrayList) {
         this.mcontext = mcontext;
-        this.images = images;
+        //this.images = images;
         this.names = names;
-        this.imagesInt=imagesInt;
+        //this.imagesInt=imagesInt;
+        this.UrlArrayList = UrlArrayList;
     }
 
     public AdapterToShowDataFromDatabase(Context c, ArrayList<NameAndUrlModel> names) {
@@ -82,26 +83,41 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
             iv = (ImageView) grid.findViewById(R.id.imageViewIdSingleLayout);
 
 
-            String check = "Add Item";
+            String UrlCheck =UrlArrayList.get(position).getUrl() ;
             int newPosition;
 
-            if(position<12){
-                tv.setText(names.get(position).getItemName());
-                iv.setImageResource(imagesInt.get(position));
-            }
 
-            else {
 
                 tv.setText(names.get(position).getItemName());
 
                 if(names.get(position).getItemName().charAt(0)=='f' || names.get(position).getItemName().charAt(0)=='F')
                 {
-                    iv.setImageResource(R.drawable.f);
-                    //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mcontext, ""+UrlArrayList.get(position).getUrl(), Toast.LENGTH_SHORT).show();
+
+                    if((names.get(position).getItemName()).equals("Facebook") || (names.get(position).getItemName()).equals("facebook") ){
+
+                        iv.setImageResource(R.drawable.facebook);
+                        //Toast.makeText(mcontext, ""+UrlArrayList.get(position).getUrl(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    else {
+                        iv.setImageResource(R.drawable.f);
+                    }
                 }
 
                 else if(names.get(position).getItemName().charAt(0)=='a' || names.get(position).getItemName().charAt(0)=='A')
                 {
+
+                    if(UrlCheck.equals("http://www.amazon.com") || UrlCheck.equals("www.amazon.com") ||UrlCheck.equals("amazon.com")){
+
+                        iv.setImageResource(R.drawable.amazon);
+                    }
+                    else if((names.get(position).getItemName().equals("Add Item"))){
+                        iv.setImageResource(R.drawable.plus);
+                    }
+
+                    else
+
                     iv.setImageResource(R.drawable.a);
                     //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
                 }
@@ -124,30 +140,51 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
                     //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
                 }else if(names.get(position).getItemName().charAt(0)=='e' || names.get(position).getItemName().charAt(0)=='E')
                 {
+
                     iv.setImageResource(R.drawable.e);
                     //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
                 }else if(names.get(position).getItemName().charAt(0)=='g' || names.get(position).getItemName().charAt(0)=='G')
                 {
-                    iv.setImageResource(R.drawable.g);
-                    //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
+                    if(UrlCheck.equals("http://www.google.com") || UrlCheck.equals("www.google.com") ||UrlCheck.equals("google.com")){
+
+                        iv.setImageResource(R.drawable.google);
+                    }
+                    else if(UrlCheck.equals("http://www.gmail.com") || UrlCheck.equals("www.gmail.com") ||UrlCheck.equals("gmail.com")){
+
+                        iv.setImageResource(R.drawable.gmail);
+                    }
+                    else
+                        iv.setImageResource(R.drawable.g);
+
                 }else if(names.get(position).getItemName().charAt(0)=='h' || names.get(position).getItemName().charAt(0)=='H')
                 {
                     iv.setImageResource(R.drawable.additem);
                     //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
                 }else if(names.get(position).getItemName().charAt(0)=='i' || names.get(position).getItemName().charAt(0)=='I')
                 {
-                    iv.setImageResource(R.drawable.i);
+                    if(UrlCheck.equals("http://www.instagram.com") || UrlCheck.equals("www.instagram.com") ||UrlCheck.equals("instagram.com")){
+
+                        iv.setImageResource(R.drawable.instagram);
+                    }
+                    else
+                        iv.setImageResource(R.drawable.i);
                     //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
                 }else if(names.get(position).getItemName().charAt(0)=='j' || names.get(position).getItemName().charAt(0)=='J')
                 {
                     iv.setImageResource(R.drawable.additem);
-                    //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
+
                 }else if(names.get(position).getItemName().charAt(0)=='k' || names.get(position).getItemName().charAt(0)=='K')
                 {
                     iv.setImageResource(R.drawable.ic_launcher_background);
-                    //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
+
                 }else if(names.get(position).getItemName().charAt(0)=='l' || names.get(position).getItemName().charAt(0)=='L')
                 {
+                    if(UrlCheck.equals("http://www.linkedin.com") || UrlCheck.equals("www.linkedin.com") ||UrlCheck.equals("linkedin.com")){
+
+                        iv.setImageResource(R.drawable.linkedin);
+                    }
+
+                    else
                     iv.setImageResource(R.drawable.ic_launcher_background);
                     //Toast.makeText(mcontext,names.get(position).getItemName().charAt(0) , Toast.LENGTH_SHORT).show();
                 }else if(names.get(position).getItemName().charAt(0)=='m' || names.get(position).getItemName().charAt(0)=='M')
@@ -168,7 +205,12 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
 
                 }else if(names.get(position).getItemName().charAt(0)=='q' || names.get(position).getItemName().charAt(0)=='Q')
                 {
-                    iv.setImageResource(R.drawable.quora);
+                    if(UrlCheck.equals("http://www.quora.com") || UrlCheck.equals("www.quora.com") ||UrlCheck.equals("quora.com")){
+
+                        iv.setImageResource(R.drawable.quora);
+                    }
+                    else
+                        iv.setImageResource(R.drawable.quora);
 
                 }else if(names.get(position).getItemName().charAt(0)=='r' || names.get(position).getItemName().charAt(0)=='R')
                 {
@@ -180,7 +222,15 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
 
                 }else if(names.get(position).getItemName().charAt(0)=='t' || names.get(position).getItemName().charAt(0)=='T')
                 {
-                    iv.setImageResource(R.drawable.t);
+                    if((UrlArrayList.get(position).getUrl()).equals("http://www.twitter.com") || (UrlArrayList.get(position).getUrl()).equals("www.twitter.com") ||(UrlArrayList.get(position).getUrl()).equals("twitter.com")){
+
+                        iv.setImageResource(R.drawable.twitter);
+                    }
+
+                    else{
+                        iv.setImageResource(R.drawable.t);
+                    }
+
 
                 }else if(names.get(position).getItemName().charAt(0)=='u' || names.get(position).getItemName().charAt(0)=='U')
                 {
@@ -190,23 +240,39 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
                 {
                     iv.setImageResource(R.drawable.reviewfinal2);
 
-                }else if(names.get(position).getItemName().charAt(0)=='w' || names.get(position).getItemName().charAt(0)=='W')
+                }
+                else if(names.get(position).getItemName().charAt(0)=='w' || names.get(position).getItemName().charAt(0)=='W')
                 {
+                    if(UrlCheck.equals("http://www.wikipedia.org") || UrlCheck.equals("www.wikipedia.org") ||UrlCheck.equals("wikipedia.org")){
+
+                        iv.setImageResource(R.drawable.wikipedia);
+                    }
+
+                    else
                     iv.setImageResource(R.drawable.w);
 
-                }else if(names.get(position).getItemName().charAt(0)=='x' || names.get(position).getItemName().charAt(0)=='X')
+                }
+                else if(names.get(position).getItemName().charAt(0)=='x' || names.get(position).getItemName().charAt(0)=='X')
                 {
                     iv.setImageResource(R.drawable.x);
 
                 }else if(names.get(position).getItemName().charAt(0)=='y' || names.get(position).getItemName().charAt(0)=='Y')
                 {
+                    if((UrlArrayList.get(position).getUrl()).equals("http://www.youtube.com") || (UrlArrayList.get(position).getUrl()).equals("www.youtube.com") ||(UrlArrayList.get(position).getUrl()).equals("youtube.com")){
+
+                        tv.setText(names.get(position).getItemName());
+                        iv.setImageResource(R.drawable.youtube);
+                    }else
                     iv.setImageResource(R.drawable.ic_launcher_background);
 
-                }else if(names.get(position).getItemName().charAt(0)=='z' || names.get(position).getItemName().charAt(0)=='Z')
+                }
+                else if(names.get(position).getItemName().charAt(0)=='z' || names.get(position).getItemName().charAt(0)=='Z')
                 {
                     iv.setImageResource(R.drawable.z);
 
                 }
+
+
 
                 else {
                     iv.setImageResource(R.drawable.additem);
@@ -217,7 +283,7 @@ public class AdapterToShowDataFromDatabase extends BaseAdapter {
 
 
 
-        } else {
+         else {
             grid = (View) convertView;
         }
         //grid.setTag(position);
