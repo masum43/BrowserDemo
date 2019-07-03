@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BrowserDemo</string>
+    <string name="search_or_type_web_address">Search or type web address</string>
+    <string name="go">Go</string>
 </resources>

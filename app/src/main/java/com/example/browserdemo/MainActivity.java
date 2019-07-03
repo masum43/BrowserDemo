@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                        }
                        else {
 
-                           UrlFromDatabase = myDatabaseSource.getAllItemWithNameUrlAndImage();
                            String url = UrlFromDatabase.get(position).getUrl();
                            Intent intentAddItem = new Intent(MainActivity.this, BrowsingActivity.class);
                            intentAddItem.putExtra("urlFromGrid","http://"+url);
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             deleteArrayList = myDatabaseSource.getAllItemWithNameUrlAndImage();
             //Toast.makeText(this, "Error :  "+deleteArrayList, Toast.LENGTH_LONG).show();
             if (deleteArrayList.get(adapterContextMenuInfo.position).getItemName().equals("Add Item")){
-                Toast.makeText(this, "No no you can not delete this... Please don't mind.. :)", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "No no you can not delete this... Please don't mind.. :)", Toast.LENGTH_SHORT).show();
             }
             else {
 

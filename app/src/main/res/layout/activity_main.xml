@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
+    android:background="#0f3b52"
     tools:context=".MainActivity">
 
 <LinearLayout
@@ -18,30 +19,29 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:weightSum="3"
+
         >
 
         <EditText
             android:id="@+id/searchWebId"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:layout_weight="2"
-            android:paddingBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:hint="Search or type web address"
+            android:padding="5dp"
+            android:hint="@string/search_or_type_web_address"
+            android:background="@drawable/round_edit_text"
             />
 
         <Button
-            android:layout_marginRight="8dp"
             android:id="@+id/goBtnId"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             android:layout_weight="1"
-            android:text="Go"
+            android:text="@string/go"
+            android:background="#65B388FF"
+            android:layout_marginLeft="5dp"
             />
 
 
@@ -49,14 +49,11 @@
 
 
     <GridView
-        android:layout_weight="6"
         android:id="@+id/gridViewId"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+       android:layout_marginTop="30dp"
+        android:layout_weight="7"
         android:numColumns="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
